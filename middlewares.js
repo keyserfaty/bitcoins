@@ -2,7 +2,7 @@ var config = require('./config'),
 	request = require('request');
 
 // turns group of strings into object
-exports.saveValuesToObject = function (cad, usd, cpl, callback) {
+exports.saveValuesToObject = function (callback) {
 	var result = {};
 
 	var coinsPaths = {
@@ -11,21 +11,33 @@ exports.saveValuesToObject = function (cad, usd, cpl, callback) {
 		cpl: config.cpl
 	};
 
-	// como loopeo un objeto?
-	coinsPaths.forEach(function (path) {
-		readValues(path, function (err, value) {
-			if (err) return err;
 
-			// como agarro la key del objeto?
-			result.[coinsPaths[path].key()] = value;
+	for (coin in coinsPaths) {
+		readValues(coinsPaths[coin], function (err, value) {
+			if (err) return callback(err);
+
+			console.log(result);
+			return callback(null, result[coin] = value);
 		});
-	});
+	};
 
-	return callback(null, result);
+	// q.fcall(el for con el readvalues)
+	// .then(function (result))
+
+	// function searchForValue () {
+	// 	return returnValue()
+	// 	.then(function (result)) {
+
+	// 	}
+	// }
+
+
+	// return callback(null, result);
+
 }
 
 // reads content of an url and returns an string with result
-exports.readValues = function (path, callback) {
+function readValues (path, callback) {
 	request(path, function (err, res, body) {
 		if (err) return callback(err);
 
