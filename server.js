@@ -9,7 +9,8 @@ app.use(express.static(path.join(__dirname, 'views')));
 
 // routes
 app.use('/', router);
-app.use('/refresh', router);
+app.use('/getAll', router);
+app.use('/saveNew', router);
 
 // models
 
