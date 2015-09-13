@@ -1,7 +1,7 @@
-var config = require('./config'),
-	request = require('request'),
+var	request = require('request'),
 	Q = require('q'),
-	_ = require('underscore');
+	_ = require('underscore'),
+	config = require('./config');
 
 // turns group of strings into object
 exports.saveValuesToObject = function (callback) {
