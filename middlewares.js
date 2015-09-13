@@ -9,7 +9,7 @@ exports.saveValuesToObject = function (callback) {
 	var coinsPaths = {
 		cad: config.cad,
 		usd: config.usd,
-		cpl: config.cpl
+		clp: config.clp
 	};
 
 	var readUrl = function (path) {

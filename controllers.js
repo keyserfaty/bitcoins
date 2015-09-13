@@ -3,7 +3,7 @@ var middlewares = require('./middlewares');
 exports.getAll = function (req, res) {
 	// findOne el último dato de la db. 
 	middlewares.saveValuesToObject(function (err, obj) {
-		console.log(obj)
+		return res.send(obj);
 	});
 }
 
