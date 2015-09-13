@@ -14,25 +14,15 @@ exports.saveValuesToObject = function (callback) {
 
 	for (coin in coinsPaths) {
 		readValues(coinsPaths[coin], function (err, value) {
+			// este console.log de acá
+			console.log(coin);
 			if (err) return callback(err);
 
-			console.log(result);
-			return callback(null, result[coin] = value);
+			result[coin] = value;
 		});
 	};
 
-	// q.fcall(el for con el readvalues)
-	// .then(function (result))
-
-	// function searchForValue () {
-	// 	return returnValue()
-	// 	.then(function (result)) {
-
-	// 	}
-	// }
-
-
-	// return callback(null, result);
+	return callback(null, result);
 
 }
 
