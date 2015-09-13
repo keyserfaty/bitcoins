@@ -5,54 +5,53 @@ var config = require('./config'),
 
 // turns group of strings into object
 exports.saveValuesToObject = function (callback) {
-	var result = [];
 
 	var coinsPaths = {
 		cad: config.cad,
 		usd: config.usd,
-		clp: config.clp
+		cpl: config.cpl
 	};
 
-	var getValue = function(path, coin, i) {
-		var q = Q.defer();
-		readValues(path, function (err, value) {
-			var res = {};
-			res[coin] = value;
-			q.resolve(res);
+	var readUrl = function (path) {
+		var deferred = Q.defer();
+		readValue(path, function (err, value) {
+			if (err) deferred.reject(err);
+
+			else deferred.resolve(value);
 		});
-		return q.promise;
-	};
+		return deferred.promise;
+	}
 
-	var getAllValues = function() {
-		var q = Q.defer(),
-		pathsLength = _.size(coinsPaths),
-		allRes = [],
-		i = 1;
+	var readAll = function (coinsPaths) {
+		var deferred = Q.defer();
 		
-		for (var coin in coinsPaths) {
-			path = coinsPaths[coin];
-			var result = [];
-			getValue(path, coin, i).then(function(res){
-				result.push(res);
-				if (i == pathsLength) {
-					// Cuando recorrio todo el objeto, resuelvo la promise
-					q.resolve(result);
-				}
-				i++;
-			});
-		}
-		return q.promise;
-	};
+		var result = {};
+		var mapPosition = _.size(coinsPaths);
 
-	getAllValues().then(function(result){
+		_.map(coinsPaths, function (path, key) {
+			readUrl(path).then(function (value) {
+				mapPosition--;
+				result[key] = value;
+
+				if (mapPosition === 0) {
+					deferred.resolve(result);
+				}
+
+			}, function (err) {
+				if (err) deferred.reject(err);
+			});
+		});
+
+		return deferred.promise;
+	}
+
+	return readAll(coinsPaths).then(function (result) {
 		return callback(null, result);
 	});
-	
-	
 }
 
 // reads content of an url and returns an string with result
-function readValues (path, callback) {
+function readValue (path, callback) {
 	request(path, function (err, res, body) {
 		if (err) return callback(err);
 
