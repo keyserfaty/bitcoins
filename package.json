@@ -23,6 +23,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cron": "^1.0.9",
     "express": "^4.13.3",
     "mongoose": "^4.1.5",
     "request": "^2.61.0",

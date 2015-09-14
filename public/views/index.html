@@ -1,0 +1,50 @@
+<html ng-app="bitApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Test</title>
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="css/skeleton/normalize.css">
+	<link rel="stylesheet" href="css/skeleton/skeleton.css">
+	<link rel="stylesheet" href="css/scss/style.css">
+
+	<!-- JS -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+    <script src="config.js"></script>
+</head>
+<body ng-controller="mainController">
+	<div class="full-width-container">
+		<header>
+			<div id="alarm_top"> 
+				<!-- sacar el margen izquierdo -->
+				    <div class="twelve columns">
+				    	<p>Bitcoin value</p>
+				    </div>
+				
+			</div>
+		</header>
+		
+		<section id="sub_container">
+			<section id="form">
+				
+				<div id="form_title">
+					<p>Bitcoin</p>
+				</div>
+				<div id="form_content">
+					<div id="form_inputs">
+						<ul ng-repeat="(coin, price) in prices">
+							<li>
+								{{ coin }}: {{ price }}
+							</li>
+						</ul>
+					</div>
+				</div>
+
+			</section>
+		</section>
+	</div>
+
+
+</body>
+</html>

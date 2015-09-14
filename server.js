@@ -5,7 +5,9 @@ var express = require('express'),
 	router = require('./routes');
 
 // static files
-app.use(express.static(path.join(__dirname, 'views')));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public/assets')));
+app.use(express.static(path.join(__dirname, 'public/views')));
 
 // routes
 app.use('/', router);
@@ -13,8 +15,7 @@ app.use('/getAll', router);
 app.use('/saveNew', router);
 
 // models
-
-
+var valuesModel = require('./models');
 
 
 // db connection

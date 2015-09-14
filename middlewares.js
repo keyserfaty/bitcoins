@@ -1,10 +1,23 @@
 var	request = require('request'),
 	Q = require('q'),
 	_ = require('underscore'),
+	CronJob = require('cron').CronJob,
 	config = require('./config');
 
-// turns group of strings into object
-exports.saveValuesToObject = function (callback) {
+// creates a job that runs every minute
+exports.updateValues = function (callback) {
+	var job = new CronJob('20 * * * * *', function () {
+		console.log('Starts updating job');
+		saveValuesToObject(function (err, object) {
+			if (err) return err;
+			console.log('Finished updating');
+			return callback(null, object);
+		});
+	}, null, true);
+}
+
+// puts group of values in object
+function saveValuesToObject (callback) {
 
 	var coinsPaths = {
 		cad: config.cad,

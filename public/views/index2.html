@@ -1,0 +1,19 @@
+<html ng-app="bitApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Bitcoin values</title>
+	<link rel="stylesheet" href="style.css">
+	<!-- Angular -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+    <script src="config.js"></script>
+</head>
+<body ng-controller="mainController">
+	<ul ng-repeat="(coin, price) in prices">
+		<li>
+			{{ coin }}: {{ price }}
+		</li>
+	</ul>
+	
+</body>
+</html>
