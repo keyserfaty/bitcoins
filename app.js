@@ -2,12 +2,14 @@ var express = require('express'),
 	app = express(),
 	mongoose = require('mongoose'),
 	path = require('path'),
-	router = require('./routes');
+	router = require('./lib/routes');
 
 // static files
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'public/assets')));
+app.use(express.static(path.join(__dirname, 'public/css')));
+app.use(express.static(path.join(__dirname, 'public/libs')));
 app.use(express.static(path.join(__dirname, 'public/views')));
+app.use(express.static(path.join(__dirname, 'src')));
 
 // routes
 app.use('/', router);
@@ -15,7 +17,7 @@ app.use('/getAll', router);
 app.use('/saveNew', router);
 
 // models
-var valuesModel = require('./models');
+var valuesModel = require('./lib/models');
 
 
 // db connection

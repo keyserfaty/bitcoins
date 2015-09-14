@@ -4,9 +4,9 @@
 	<title>Test</title>
 
 	<!-- CSS -->
-	<link rel="stylesheet" href="css/skeleton/normalize.css">
-	<link rel="stylesheet" href="css/skeleton/skeleton.css">
-	<link rel="stylesheet" href="css/scss/style.css">
+	<link rel="stylesheet" href="libs/skeleton/normalize.css">
+	<link rel="stylesheet" href="libs/skeleton/skeleton.css">
+	<link rel="stylesheet" href="style.min.css">
 
 	<!-- JS -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
@@ -15,24 +15,23 @@
 </head>
 <body ng-controller="mainController">
 	<div class="full-width-container">
-		<header>
-			<div id="alarm_top"> 
-				<!-- sacar el margen izquierdo -->
-				    <div class="twelve columns">
-				    	<p>Bitcoin value</p>
+
+		<section id="sub_container" class="row">
+			<section id="box">
+				
+				<div id="box_title">
+					<div class="ten columns">
+						<p>BITCOIN</p>
+					</div>
+						
+				    <div class="two columns">
+						<div id="spinner">
+							<p>holi</p>
+						</div>
 				    </div>
-				
-			</div>
-		</header>
-		
-		<section id="sub_container">
-			<section id="form">
-				
-				<div id="form_title">
-					<p>Bitcoin</p>
 				</div>
-				<div id="form_content">
-					<div id="form_inputs">
+				<div id="box_content">
+					<div id="box_inputs">
 						<ul ng-repeat="(coin, price) in prices">
 							<li>
 								{{ coin }}: {{ price }}
