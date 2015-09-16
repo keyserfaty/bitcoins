@@ -26,18 +26,26 @@
 						
 				    <div class="two columns">
 						<div id="spinner">
-							<p>holi</p>
+						<!-- tiene que girar cada vez que se hace un llamado a post -->
+							<p>spin</p>
 						</div>
 				    </div>
 				</div>
 				<div id="box_content">
 					<div id="box_inputs">
-						<ul ng-repeat="(coin, price) in prices">
-							<li>
-								{{ coin }}: {{ price }}
-							</li>
-						</ul>
+						<div ng-repeat="(coin, price) in prices">
+							<div class="each_value">
+							<!-- tiene que actualizarse cada 15 segundos -->
+								<strong>{{ coin }}:</strong> {{ price | currency }}
+							</div>
+						</div>
+						<div class="time">
+						<!-- tiene que actualizar esto tambien ademas de mover el spinner -->
+						<!-- hay que cambiar el formato también -->
+							Última actualización: {{ time }} hs.
+						</div>
 					</div>
+
 				</div>
 
 			</section>

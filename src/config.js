@@ -3,6 +3,7 @@ var bitApp = angular.module('bitApp', []);
 bitApp.controller('mainController', function ($scope, $http) {
 	
 	var prices = {};
+	var time = [];
 	var activeCoins = ["CAD", "USD", "CLP"];
 
 	$http.get('/getAll')
@@ -14,6 +15,9 @@ bitApp.controller('mainController', function ($scope, $http) {
 					if (elem === coin) prices[elem] = data[0][elem];
 				}
 			});
+
+			time.push(data[0]["time"]);
+			$scope.time = time[0];
 
 			$scope.prices = prices;
 		})

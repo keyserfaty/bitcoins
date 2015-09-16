@@ -73,15 +73,24 @@ body {
 
 	#box_inputs {
 		position: absolute;
-		top: 24px;
-	}
-
-	ul {
+		top: 15px;
 		font: $boxText;
+		
+		.each_value {
+			border-bottom: 1px solid #F7F7F7;
+			margin-bottom: 15px;
+			padding-bottom: 15px;
+			padding-left: 15px;
+			width: 345px;
 
-		li {
-			list-style: none;
+		}
+
+		.time {
+			color: #9c9c9c;
+			text-align: right;
+			margin-right: 15px;
 		}
 	}
+
 
 }

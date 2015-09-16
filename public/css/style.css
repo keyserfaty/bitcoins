@@ -65,8 +65,15 @@ body {
   width: 360px; }
   #box_content #box_inputs {
     position: absolute;
-    top: 24px; }
-  #box_content ul {
+    top: 15px;
     font: 13px "Open Sans", sans-serif; }
-    #box_content ul li {
-      list-style: none; }
+    #box_content #box_inputs .each_value {
+      border-bottom: 1px solid #F7F7F7;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      padding-left: 15px;
+      width: 345px; }
+    #box_content #box_inputs .time {
+      color: #9c9c9c;
+      text-align: right;
+      margin-right: 15px; }
