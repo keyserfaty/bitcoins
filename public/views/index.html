@@ -10,8 +10,10 @@
 
 	<!-- JS -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script><!-- load angular -->
     <script src="config.js"></script>
+    <script src="http://fgnass.github.io/spin.js/spin.min.js"></script>
+    <script src="libs/angular-spinner.min.js"></script>
 </head>
 <body ng-controller="mainController">
 	<div class="full-width-container">
@@ -27,7 +29,7 @@
 				    <div class="two columns">
 						<div id="spinner">
 						<!-- tiene que girar cada vez que se hace un llamado a post -->
-							<p>spin</p>
+							<p><span us-spinner spinner-key="spinner-1"></span></p>
 						</div>
 				    </div>
 				</div>
