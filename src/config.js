@@ -1,6 +1,6 @@
-var bitApp = angular.module('bitApp', ['angularSpinner']);
+var bitApp = angular.module('bitApp', []);
 
-bitApp.controller('mainController', ['$scope', '$http', '$interval', 'usSpinnerService', function ($scope, $http, $interval, usSpinnerService) {
+bitApp.controller('mainController', ['$scope', '$http', '$interval', function ($scope, $http, $interval) {
 		
 	var prices = {};
 	var time = [];
@@ -18,9 +18,6 @@ bitApp.controller('mainController', ['$scope', '$http', '$interval', 'usSpinnerS
 	}
 
 	function getAll () {
-		// Starts spinner while view is getting updated
-		usSpinnerService.spin('spinner-1');
-
 		$http.get('/getAll')
 
 			.success(function (data) {
@@ -36,9 +33,6 @@ bitApp.controller('mainController', ['$scope', '$http', '$interval', 'usSpinnerS
 					// Saves time of last update in array to display in view
 					time.push(data[0]["time"]);
 					$scope.time = time[0];
-
-					// View is updated so spinner stops
-					usSpinnerService.stop('spinner-1');
 			})
 
 			.error(function (data) {

@@ -77,3 +77,6 @@ body {
       color: #9c9c9c;
       text-align: right;
       margin-right: 15px; }
+
+#spinner:before {
+  content: "\00a0 "; }
