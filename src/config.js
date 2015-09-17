@@ -45,7 +45,6 @@ bitApp.controller('mainController', ['$scope', '$http', '$interval', function ($
 
 	// Makes a call to GET method every 15 seconds to bring updated data from db
 	$interval(function () {
-		console.log('Updates view');
 		getAll();
 	}, 15000);
 
