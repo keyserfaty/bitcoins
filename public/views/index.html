@@ -1,7 +1,7 @@
 <html ng-app="bitApp">
 <head>
 	<meta charset="UTF-8">
-	<title>Test</title>
+	<title>Bitcoin</title>
 
 	<!-- CSS -->
 	<link rel="stylesheet" href="libs/skeleton/normalize.css">
@@ -15,7 +15,7 @@
     <script src="http://fgnass.github.io/spin.js/spin.min.js"></script>
     <script src="libs/angular-spinner.min.js"></script>
 </head>
-<body ng-controller="mainController">
+<body ng-controller="mainController" ng-init="init()">
 	<div class="full-width-container">
 
 		<section id="sub_container" class="row">
@@ -29,7 +29,7 @@
 				    <div class="two columns">
 						<div id="spinner">
 						<!-- tiene que girar cada vez que se hace un llamado a post -->
-							<p><span us-spinner spinner-key="spinner-1"></span></p>
+							<span us-spinner="{radius:4, width:2, length: 0}" spinner-key="spinner-1"></span>
 						</div>
 				    </div>
 				</div>
@@ -44,7 +44,7 @@
 						<div class="time">
 						<!-- tiene que actualizar esto tambien ademas de mover el spinner -->
 						<!-- hay que cambiar el formato también -->
-							Última actualización: {{ time }} hs.
+							Last update: {{ time }} hs.
 						</div>
 					</div>
 

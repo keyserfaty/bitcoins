@@ -43,7 +43,7 @@ body {
   white-space: nowrap; }
   #box_title p {
     color: #555;
-    font: bold 14px "Open Sans", bold, sans-serif;
+    font: 14px "Open Sans", sans-serif;
     line-height: 45px;
     margin-left: 10px; }
 
