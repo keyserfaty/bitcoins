@@ -7,22 +7,24 @@ bitApp.controller('mainController', ['$scope', '$http', '$interval', function ($
 	var activeCoins = ["CAD", "USD", "CLP"];
 
 	// Make POST call when site is loaded
-	$scope.init = function () {
+	function saveNew () {
 		$http.post('/saveNew')
-			.then(function (res) {
+			.then(function (data) {
 				console.log('New entries created successfully');
+				// termina el spinner
 
 			}, function (err) {
 				console.log(err);
 		});
 	}
 
+
 	function getAll () {
 		$http.get('/getAll')
 
 			.success(function (data) {
-
-					// Creates object of prices and currencies to display in view
+				// Creates object of prices and currencies to display in view
+				$interval(function () {
 					activeCoins.forEach(function (coin) {
 						for (elem in data[0]) {
 							if (elem === coin) prices[elem] = data[0][elem];
@@ -33,6 +35,8 @@ bitApp.controller('mainController', ['$scope', '$http', '$interval', function ($
 					// Saves time of last update in array to display in view
 					time.push(data[0]["time"]);
 					$scope.time = time[0];
+					console.log('finishes updating');
+				}, 5000);
 			})
 
 			.error(function (data) {
@@ -40,12 +44,9 @@ bitApp.controller('mainController', ['$scope', '$http', '$interval', function ($
 			});		
 	}
 
-	// Calls GET method for the first time
+	// Calls POST and GET method for the first time
+	saveNew();
 	getAll();
 
-	// Makes a call to GET method every 15 seconds to bring updated data from db
-	$interval(function () {
-		getAll();
-	}, 15000);
 
 }]);
