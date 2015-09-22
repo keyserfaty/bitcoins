@@ -2,7 +2,8 @@ var express = require('express'),
 	app = express(),
 	mongoose = require('mongoose'),
 	path = require('path'),
-	router = require('./lib/routes');
+	router = require('./lib/routes'),
+	job = require('./lib/job');
 
 // static files
 app.use(express.static(path.join(__dirname, 'public')));
@@ -14,7 +15,6 @@ app.use(express.static(path.join(__dirname, 'src')));
 // routes
 app.use('/', router);
 app.use('/getAll', router);
-app.use('/saveNew', router);
 
 // models
 var valuesModel = require('./lib/models');
@@ -31,10 +31,5 @@ app.listen(3000, function () {
 	console.log('Listening on port 3000');
 });
 
-var job = function () {
-	// Job cada 1 segundo
-    console.log("1 segundo!");
-    // Acá agregá el insert  y modifica el tiempo
-    setTimeout(job, 1000);
-}
+// runs job
 job();
