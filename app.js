@@ -30,3 +30,11 @@ mongoose.connect('mongodb://localhost/bitcoin', function (err, res) {
 app.listen(3000, function () {
 	console.log('Listening on port 3000');
 });
+
+var job = function () {
+	// Job cada 1 segundo
+    console.log("1 segundo!");
+    // Acá agregá el insert  y modifica el tiempo
+    setTimeout(job, 1000);
+}
+job();
