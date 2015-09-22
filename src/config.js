@@ -24,19 +24,16 @@ bitApp.controller('mainController', ['$scope', '$http', '$interval', function ($
 
 			.success(function (data) {
 				// Creates object of prices and currencies to display in view
-				$interval(function () {
-					activeCoins.forEach(function (coin) {
-						for (elem in data[0]) {
-							if (elem === coin) prices[elem] = data[0][elem];
-						}
-					});
-					$scope.prices = prices;
+				activeCoins.forEach(function (coin) {
+					for (elem in data[0]) {
+						if (elem === coin) prices[elem] = data[0][elem];
+					}
+				});
+				$scope.prices = prices;
 
-					// Saves time of last update in array to display in view
-					time.push(data[0]["time"]);
-					$scope.time = time[0];
-					console.log('finishes updating');
-				}, 5000);
+				// Saves time of last update in array to display in view
+				time.push(data[0]["time"]);
+				$scope.time = time[0];
 			})
 
 			.error(function (data) {
