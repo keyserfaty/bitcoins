@@ -5,6 +5,7 @@ var express = require('express'),
 	router = require('./lib/routes'),
 	job = require('./lib/job');
 
+var services = require('./lib/services');
 // static files
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public/css')));
@@ -31,5 +32,7 @@ app.listen(3000, function () {
 	console.log('Listening on port 3000');
 });
 
+
 // runs job
-job();
+
+services.updateValues();
