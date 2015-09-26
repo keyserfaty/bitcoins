@@ -29,6 +29,3 @@ mongoose.connect('mongodb://localhost/bitcoin', function (err, res) {
 app.listen(3000, function () {
 	console.log('Listening on port 3000');
 });
-
-// runs values update job
-job.updateValues();
