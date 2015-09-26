@@ -3,9 +3,7 @@ var express = require('express'),
 	mongoose = require('mongoose'),
 	path = require('path'),
 	router = require('./lib/routes'),
-	job = require('./lib/job');
-
-var services = require('./lib/services');
+	services = require('./lib/services');
 // static files
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public/css')));
@@ -33,6 +31,5 @@ app.listen(3000, function () {
 });
 
 
-// runs job
-
+// runs updating values job
 services.updateValues();

@@ -8,21 +8,19 @@
 	<link rel="stylesheet" href="libs/skeleton/skeleton.css">
 	<link rel="stylesheet" href="style.min.css">
 
-	<!-- JS -->
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script><!-- load angular -->
-    <script src="config.js"></script>
-    
 </head>
-<body ng-controller="mainController" ng-init="init()">
+<body ng-controller="mainController">
 	<div class="full-width-container">
 
 		<section id="sub_container" class="row">
 			<section id="box">
 				
 				<div id="box_title">
-					<div class="twelve columns">
+					<div class="ten columns">
 						<p>BITCOIN</p>
+					</div>
+					<div class="two columns" id="spinner">
+						<span spinner-key="spinner-1" us-spinner="{lines: 7, radius: 6, width: 4, length: 0, scale: 0.75}"></span>
 					</div>
 				</div>
 				<div id="box_content">
@@ -43,6 +41,12 @@
 		</section>
 	</div>
 
+	<!-- JS -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script><!-- load angular -->
+    <script src="libs/spin.min.js"></script>
+    <script src="libs/angular-spinner.min.js"></script>
+    <script src="app.js"></script>
 
 </body>
 </html>

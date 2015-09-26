@@ -95,6 +95,9 @@ body {
 
 }
 
-#spinner:before {
+#spinner {
 	content: "\00a0 ";
+	top: 22px;
+    right: 0px;
+    position: absolute;
 }
