@@ -22,7 +22,10 @@ bitApp.controller('mainController', ['$scope', '$http', '$interval', 'usSpinnerS
 			time.push(data[0]["time"]);
 			$scope.time = time[0];
 
-			usSpinnerService.stop('spinner-1');
+			var spinner = $interval(function () {
+				usSpinnerService.stop('spinner-1');
+			}, 1000, 1);
+
 		})
 
 		.error(function (data) {
@@ -30,14 +33,11 @@ bitApp.controller('mainController', ['$scope', '$http', '$interval', 'usSpinnerS
 		});		
 	}
 
-	var updateView = function () {
-		$interval(function () {
-	        usSpinnerService.spin('spinner-1');  
-			getAll();
-		}, 15000);
-	}
-
+	var updateView = $interval(function () {
+        usSpinnerService.spin('spinner-1');  
+		getAll();
+	}, 15000);
+	
 	getAll();
-	updateView();
 
 }]);

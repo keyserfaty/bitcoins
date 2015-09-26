@@ -3,7 +3,7 @@ var express = require('express'),
 	mongoose = require('mongoose'),
 	path = require('path'),
 	router = require('./lib/routes'),
-	services = require('./lib/services');
+	job = require('./lib/job');
 // static files
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public/css')));
@@ -30,6 +30,5 @@ app.listen(3000, function () {
 	console.log('Listening on port 3000');
 });
 
-
-// runs updating values job
-services.updateValues();
+// runs values update job
+job.updateValues();
