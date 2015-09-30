@@ -17,7 +17,7 @@ module.exports = function(grunt) {
 
 		// concat: {
 		// 	task: {
-		// 		src: '<%= pkg.name %>.js', 
+		// 		src: '', 
 		// 		dest: 'destination'
 		// 	},
 		// 	options: {
@@ -31,6 +31,7 @@ module.exports = function(grunt) {
 		// 		'sourceMapStyle': 'embed'
 		// 	}
 		// },
+
 		cssmin: {
 			task: {
 				src: 'public/css/style.css', 
@@ -42,7 +43,7 @@ module.exports = function(grunt) {
 				'report': 'min'
 			}
 		},
-		// no sé qué hace
+
 		// jshint: {
 		// 	task: {
 		// 		src: '<%= pkg.name %>.js', 
@@ -60,10 +61,10 @@ module.exports = function(grunt) {
 		// },
 		sass: {
 			task: {
-				src: 'src/assets/scss/style.scss', 
-				dest: 'public/css/style.css'
+				src: '<%= paths.src.scss %>', 
+				dest: '<%= paths.dest.scss %>'
 			},
-			options: {
+			options: {	
 				'trace': false,
 				'unixNewlines': false,
 				'check': false,
@@ -81,7 +82,7 @@ module.exports = function(grunt) {
 				'update': false
 			}
 		},
-		// no sé para qué es
+		// no sÃ© para quÃ© es
 		// uglify: {
 		// 	task: {
 		// 		src: 'public/<%= pkg.name %>.js', 
@@ -107,7 +108,7 @@ module.exports = function(grunt) {
 		// },
 		watch: {
 	      sass: {
-	        files: 'src/assets/scss/style.scss',
+	        files: '<%= paths.src.scss %>',
 	        tasks: ['sass', 'cssmin']
 	      }
 	    }
