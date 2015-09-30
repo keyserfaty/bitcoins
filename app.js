@@ -4,10 +4,12 @@ var express = require('express'),
 	path = require('path'),
 	router = require('./api/routes'),
 	job = require('./api/job');
+
 // static files
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public/css')));
 app.use(express.static(path.join(__dirname, 'public/libs')));
+app.use(express.static(path.join(__dirname, 'public/js')));
 app.use(express.static(path.join(__dirname, 'public/views')));
 app.use(express.static(path.join(__dirname, 'src')));
 
@@ -18,7 +20,6 @@ app.use('/getAll', router);
 // models
 var valuesModel = require('./api/models');
 
-
 // db connection
 mongoose.connect('mongodb://localhost/bitcoin', function (err, res) {
 	if (err) throw err;
@@ -26,6 +27,6 @@ mongoose.connect('mongodb://localhost/bitcoin', function (err, res) {
 });
 
 
-app.listen(3000, function () {
-	console.log('Listening on port 3000');
+app.listen(8080, function () {
+	console.log('Listening on port 8080');
 });
