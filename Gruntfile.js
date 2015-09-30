@@ -1,6 +1,20 @@
 module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
+
+		paths: {
+			src: {
+				js: ['src/*.js'],
+				css: ['public/**/*.css', 'public/**/**/*.css'],
+				scss: ['src/assets/scss/*.scss']
+			},
+			dest: {
+				js: [''],
+				css: '',
+				scss: ['public/css/*.css']
+			}
+		},
+
 		// concat: {
 		// 	task: {
 		// 		src: '<%= pkg.name %>.js', 
