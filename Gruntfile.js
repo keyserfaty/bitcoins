@@ -2,36 +2,6 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 
-		paths: {
-			src: {
-				js: ['src/*.js'],
-				css: ['public/**/*.css', 'public/**/**/*.css'],
-				scss: ['src/assets/scss/*.scss']
-			},
-			dest: {
-				js: [''],
-				css: '',
-				scss: ['public/css/*.css']
-			}
-		},
-
-		// concat: {
-		// 	task: {
-		// 		src: '', 
-		// 		dest: 'destination'
-		// 	},
-		// 	options: {
-		// 		'separator': grunt.util.linefeed,
-		// 		'banner': '',
-		// 		'footer': '',
-		// 		'stripBanners': false,
-		// 		'process': false,
-		// 		'sourceMap': false,
-		// 		'sourceMapName': undefined,
-		// 		'sourceMapStyle': 'embed'
-		// 	}
-		// },
-
 		cssmin: {
 			task: {
 				src: 'public/css/style.css', 
@@ -44,27 +14,24 @@ module.exports = function(grunt) {
 			}
 		},
 
-		// jshint: {
-		// 	task: {
-		// 		src: '<%= pkg.name %>.js', 
-		// 		dest: 'destination'
-		// 	},
-		// 	options: {
-		// 		'globals': null,
-		// 		'jshintrc': null,
-		// 		'extensions': '',
-		// 		'ignores': null,
-		// 		'force': false,
-		// 		'reporter': null,
-		// 		'reporterOutput': null
-		// 	}
-		// },
+		jshint: {
+			task: {
+				src: ['lib/*.js', '*.js', 'src/*.js']
+			},
+			options: {
+				'globals': null,
+				'force': false,
+				'reporter': null,
+				'reporterOutput': null
+			}
+		},
+
 		sass: {
 			task: {
-				src: '<%= paths.src.scss %>', 
-				dest: '<%= paths.dest.scss %>'
+				src: 'src/assets/scss/style.scss', 
+				dest: 'public/css/style.css'
 			},
-			options: {	
+			options: {
 				'trace': false,
 				'unixNewlines': false,
 				'check': false,
@@ -82,46 +49,45 @@ module.exports = function(grunt) {
 				'update': false
 			}
 		},
-		// no sÃ© para quÃ© es
-		// uglify: {
-		// 	task: {
-		// 		src: 'public/<%= pkg.name %>.js', 
-		// 		dest: 'destination'
-		// 	},
-		// 	options: {
-		// 		'mangle': {},
-		// 		'compress': {},
-		// 		'beautify': false,
-		// 		'expression': false,
-		// 		'report': 'min',
-		// 		'sourceMap': false,
-		// 		'sourceMapName': undefined,
-		// 		'sourceMapIn': undefined,
-		// 		'sourceMapIncludeSources': false,
-		// 		'enclose': undefined,
-		// 		'wrap': undefined,
-		// 		'exportAll': false,
-		// 		'preserveComments': undefined,
-		// 		'banner': '',
-		// 		'footer': ''
-		// 	}
-		// },
+
+		uglify: {
+			task: {
+				src: 'public/<%= pkg.name %>.js', 
+				dest: 'destination'
+			},
+			options: {
+				'mangle': {},
+				'compress': {},
+				'beautify': false,
+				'expression': false,
+				'report': 'min',
+				'sourceMap': false,
+				'sourceMapName': undefined,
+				'sourceMapIn': undefined,
+				'sourceMapIncludeSources': false,
+				'enclose': undefined,
+				'wrap': undefined,
+				'exportAll': false,
+				'preserveComments': undefined,
+				'banner': '',
+				'footer': ''
+			}
+		},
+
 		watch: {
 	      sass: {
-	        files: '<%= paths.src.scss %>',
+	        files: 'src/assets/scss/style.scss',
 	        tasks: ['sass', 'cssmin']
 	      }
 	    }
 	});
 
-	// grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
-	// grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-sass');
-	// grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
-	grunt.registerTask('default', ['cssmin', 'sass', 'watch']);
+	grunt.registerTask('default', ['cssmin', 'sass', 'watch', 'jshint', 'uglify']);
 
-	// grunt.registerTask('default', ['concat', 'cssmin', 'imagemin', 'jshint', 'sass', 'uglify', 'watch']);
 };
