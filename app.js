@@ -2,8 +2,8 @@ var express = require('express'),
 	app = express(),
 	mongoose = require('mongoose'),
 	path = require('path'),
-	router = require('./lib/routes'),
-	job = require('./lib/job');
+	router = require('./api/routes'),
+	job = require('./api/job');
 // static files
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public/css')));
@@ -16,7 +16,7 @@ app.use('/', router);
 app.use('/getAll', router);
 
 // models
-var valuesModel = require('./lib/models');
+var valuesModel = require('./api/models');
 
 
 // db connection
