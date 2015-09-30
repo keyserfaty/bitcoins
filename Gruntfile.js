@@ -28,7 +28,7 @@ module.exports = function(grunt) {
 
 		sass: {
 			task: {
-				src: 'src/assets/scss/style.scss', 
+				src: 'src/css/scss/style.scss', 
 				dest: 'public/css/style.css'
 			},
 			options: {
@@ -52,8 +52,8 @@ module.exports = function(grunt) {
 
 		uglify: {
 			task: {
-				src: 'public/<%= pkg.name %>.js', 
-				dest: 'destination'
+				src: 'src/js/*.js', 
+				dest: 'public/js/app.min.js'
 			},
 			options: {
 				'mangle': {},
@@ -76,7 +76,7 @@ module.exports = function(grunt) {
 
 		watch: {
 	      sass: {
-	        files: 'src/assets/scss/style.scss',
+	        files: 'src/css/scss/style.scss',
 	        tasks: ['sass', 'cssmin']
 	      }
 	    }
