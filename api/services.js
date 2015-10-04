@@ -1,4 +1,6 @@
-var	request = require('request'),
+'use strict';
+
+const request = require('request'),
 	Q = require('q'),
 	_ = require('underscore'),
 	valuesModel = require('./models'),
@@ -20,14 +22,14 @@ exports.saveToDatabase = function (obj) {
 
 // puts group of values in object
 exports.getAllCoins = function (callback) {
-	var coinsPaths = {
+	let coinsPaths = {
 		cad: api.cad,
 		usd: api.usd,
 		clp: api.clp
 	};
 
-	var readUrl = function (path) {
-		var deferred = Q.defer();
+	let readUrl = function (path) {
+		let deferred = Q.defer();
 		readValue(path, function (err, value) {
 			if (err) deferred.reject(err);
 
@@ -36,11 +38,11 @@ exports.getAllCoins = function (callback) {
 		return deferred.promise;
 	}
 
-	var readAll = function (coinsPaths) {
-		var deferred = Q.defer();
+	let readAll = function (coinsPaths) {
+		let deferred = Q.defer();
 		
-		var result = {};
-		var mapPosition = _.size(coinsPaths);
+		let result = {};
+		let mapPosition = _.size(coinsPaths);
 
 		_.map(coinsPaths, function (path, key) {
 			readUrl(path).then(function (value) {

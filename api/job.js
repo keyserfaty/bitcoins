@@ -1,4 +1,6 @@
-var getAllCoins = require('./services').getAllCoins,
+'use strict';
+
+const getAllCoins = require('./services').getAllCoins,
 	saveToDatabase = require('./services').saveToDatabase;
 
 // creates a job that runs every minute

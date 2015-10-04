@@ -1,4 +1,6 @@
-var mongoose = require('mongoose'),
+'use strict';
+
+const mongoose = require('mongoose'),
 	express = require('express'),
 	router = express.Router(),
 	controllers = require('./controllers');

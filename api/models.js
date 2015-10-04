@@ -1,6 +1,8 @@
-var mongoose = require('mongoose');
+'use strict';
 
-var valuesSchema = new mongoose.Schema({
+const mongoose = require('mongoose');
+
+const valuesSchema = new mongoose.Schema({
 	CAD: { type: Number },
 	USD: { type: Number },
 	CLP: { type: Number },
