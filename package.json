@@ -1,14 +1,10 @@
 {
-  "name": "axiomzen",
-  "version": "1.0.0",
+  "name": "bitcoins",
+  "version": "1.0",
   "description": "",
-  "main": "server.js",
-  "directories": {
-    "test": "test"
-  },
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node app.js"
   },
   "devDependencies": {
     "grunt": "0.4.5",
@@ -22,7 +18,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cron": "^1.0.9",
     "express": "^4.13.3",
     "mongoose": "^4.1.5",
     "q": "^1.4.1",
