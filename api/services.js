@@ -14,9 +14,10 @@ exports.saveToDatabase = function (obj) {
 		CLP: obj.clp
 		
 	}, function (err, values) {
-		if (err) return err;
+		if (err) { console.log(err); return; };
 		
 		console.log('Succesfully created values: ' + values + ' in db.');
+		return;
 	});	
 }
 
@@ -61,16 +62,19 @@ exports.getAllCoins = function (callback) {
 		return deferred.promise;
 	}
 
-	return readAll(coinsPaths).then(function (result) {
-		return callback(null, result);
+	readAll(coinsPaths).then(function (result) {
+		callback(null, result); return;
 	});
+	
+	return;
 }
 
 // reads content of an url and returns an string with result
 function readValue (path, callback) {
 	request(path, function (err, res, body) {
-		if (err) return callback(err);
+		if (err) { console.log(err); return; };
 
-		return callback(null, body);
+		callback(null, body);
+		return;
 	});
 }
