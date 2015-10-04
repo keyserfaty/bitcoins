@@ -1,4 +1,6 @@
-var path = require('path'),
+'use strict';
+
+const path = require('path'),
 	valuesModel = require('./models');
 
 exports.getAll = function (req, res) {

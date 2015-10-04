@@ -1,12 +1,14 @@
-var bitApp = angular.module('bitApp', ['angularSpinner']);
+'use strict';
+
+const bitApp = angular.module('bitApp', ['angularSpinner']);
 
 bitApp.controller('mainController', ['$scope', '$http', '$interval', 'usSpinnerService', function ($scope, $http, $interval, usSpinnerService) {
 		
-	var prices = {};
-	var time = [];
-	var activeCoins = ["CAD", "USD", "CLP"];
+	let prices = {};
+	let time = [];
+	let activeCoins = ["CAD", "USD", "CLP"];
 	
-	var getAll = function () {
+	let getAll = function () {
 		$http.get('/getAll')
 
 		.success(function (data) {
@@ -22,7 +24,7 @@ bitApp.controller('mainController', ['$scope', '$http', '$interval', 'usSpinnerS
 			time.push(data[0]["time"]);
 			$scope.time = time[0];
 
-			var spinner = $interval(function () {
+			let spinner = $interval(function () {
 				usSpinnerService.stop('spinner-1');
 			}, 1000, 1);
 
@@ -33,7 +35,7 @@ bitApp.controller('mainController', ['$scope', '$http', '$interval', 'usSpinnerS
 		});		
 	}
 
-	var updateView = $interval(function () {
+	let updateView = $interval(function () {
         usSpinnerService.spin('spinner-1');  
 		getAll();
 	}, 15000);

@@ -1,4 +1,6 @@
-var express = require('express'),
+'use strict';
+
+const express = require('express'),
 	app = express(),
 	mongoose = require('mongoose'),
 	path = require('path'),
@@ -18,7 +20,7 @@ app.use('/', router);
 app.use('/getAll', router);
 
 // models
-var valuesModel = require('./api/models');
+const valuesModel = require('./api/models');
 
 // db connection
 mongoose.connect('mongodb://localhost/bitcoin', function (err, res) {
