@@ -30,8 +30,8 @@ bitApp.controller('mainController', ['$scope', '$http', '$interval', 'usSpinnerS
 
 		})
 
-		.error(function (data) {
-			console.log('Error: ' + data);
+		.error(function (err) {
+			console.log('Error: ' + err);
 		});		
 	}
 
