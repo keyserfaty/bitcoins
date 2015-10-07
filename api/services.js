@@ -1,7 +1,7 @@
 'use strict';
 
-const request = require('request'),
-	Q = require('q'),
+const 
+	request = require('request'),
 	_ = require('underscore'),
 	valuesModel = require('./models'),
 	api = require('./api');
@@ -14,67 +14,79 @@ exports.saveToDatabase = function (obj) {
 		CLP: obj.clp
 		
 	}, function (err, values) {
-		if (err) { console.log(err); return; };
-		
-		console.log('Succesfully created values: ' + values + ' in db.');
+		err ? console.log(err) : console.log('Succesfully created values: ' + values + ' in db.');
 		return;
 	});	
 }
 
 // puts group of values in object
-exports.getAllCoins = function (callback) {
-	let coinsPaths = {
-		cad: api.cad,
-		usd: api.usd,
-		clp: api.clp
-	};
+exports.getAllCoins = function () {
+	let getAllPromise = new Promise(function (resolve, reject) {
 
-	let readUrl = function (path) {
-		let deferred = Q.defer();
-		readValue(path, function (err, value) {
-			if (err) deferred.reject(err);
+		let coinsPaths = {
+			cad: api.cad,
+			usd: api.usd,
+			clp: api.clp
+		};
 
-			else deferred.resolve(value);
-		});
-		return deferred.promise;
-	}
+		let readAll = function (coinsPaths) {
+			let promise = new Promise(function (resolve, reject) {
 
-	let readAll = function (coinsPaths) {
-		let deferred = Q.defer();
-		
-		let result = {};
-		let mapPosition = _.size(coinsPaths);
+				let result = {};
+				let mapPosition = _.size(coinsPaths);
 
-		_.map(coinsPaths, function (path, key) {
-			readUrl(path).then(function (value) {
-				mapPosition--;
-				result[key] = value;
+				_.map(coinsPaths, function (path, key) {
+					readUrl(path)
+					.then(function (value) {
+						mapPosition--;
+						result[key] = value;
 
-				if (mapPosition === 0) {
-					deferred.resolve(result);
-				}
+						mapPosition === 0 ? 
+						resolve(result) : reject(err);
+					});
+				});	
+			})
 
-			}, function (err) {
-				if (err) deferred.reject(err);
+			return promise;
+		}
+
+		let readUrl = function (path) {
+			let promise = new Promise(function (resolve, reject) {
+				
+				readValue(path)
+				.then(function (value) {
+					resolve(value);
+				})
+				.catch(function (err) {
+					console.log(err);
+				})
+
 			});
+
+			return promise;
+		}
+
+		// Executes promise
+		readAll(coinsPaths)
+		.then(function (result) {
+			resolve(result);
+		})
+		.catch(function (err) {
+			reject(err);
 		});
-
-		return deferred.promise;
-	}
-
-	readAll(coinsPaths).then(function (result) {
-		callback(null, result); return;
 	});
-	
-	return;
+
+	return getAllPromise;
 }
 
 // reads content of an url and returns an string with result
-function readValue (path, callback) {
-	request(path, function (err, res, body) {
-		if (err) { console.log(err); return; };
-
-		callback(null, body);
-		return;
+function readValue (path) {
+	let promise = new Promise(function (resolve, reject) {
+		request(path, function (err, res, body) {
+			err ? reject(err) : resolve(body);
+			return;
+		});
 	});
+
+	return promise;
 }
