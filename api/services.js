@@ -3,12 +3,13 @@
 const 
   request = require('request'),
   _ = require('underscore'),
-  valuesModel = require('./models'),
+  
+  Values = require('./models'),
   api = require('./api');
 
 // saves values in db
 exports.saveToDatabase = function (obj) {
-  valuesModel.create({
+  Values.create({
     CAD: obj.cad,
     USD: obj.usd,
     CLP: obj.clp
@@ -21,19 +22,19 @@ exports.saveToDatabase = function (obj) {
 
 // puts group of values in object
 exports.getAllCoins = function () {
-  let getAllPromise = new Promise(function (resolve, reject) {
+  var getAllPromise = new Promise(function (resolve, reject) {
 
-    let coinsPaths = {
+    var coinsPaths = {
       cad: api.cad,
       usd: api.usd,
       clp: api.clp
     };
 
-    let readAll = function (coinsPaths) {
-      let promise = new Promise(function (resolve, reject) {
+    var readAll = function (coinsPaths) {
+      var promise = new Promise(function (resolve, reject) {
 
-        let result = {};
-        let mapPosition = _.size(coinsPaths);
+        var result = {};
+        var mapPosition = _.size(coinsPaths);
 
         _.map(coinsPaths, function (path, key) {
           readUrl(path)
@@ -41,8 +42,7 @@ exports.getAllCoins = function () {
             mapPosition--;
             result[key] = value;
 
-            mapPosition === 0 ? 
-            resolve(result) : reject(err);
+            !mapPosition ? resolve(result) : reject(err);
           });
         }); 
       })
@@ -50,8 +50,8 @@ exports.getAllCoins = function () {
       return promise;
     }
 
-    let readUrl = function (path) {
-      let promise = new Promise(function (resolve, reject) {
+    var readUrl = function (path) {
+      var promise = new Promise(function (resolve, reject) {
         
         readValue(path)
         .then(function (value) {
@@ -81,7 +81,7 @@ exports.getAllCoins = function () {
 
 // reads content of an url and returns an string with result
 function readValue (path) {
-  let promise = new Promise(function (resolve, reject) {
+  var promise = new Promise(function (resolve, reject) {
     request(path, function (err, res, body) {
       err ? reject(err) : resolve(body);
       return;
