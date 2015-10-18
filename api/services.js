@@ -3,26 +3,25 @@
 const 
   request = require('request'),
   _ = require('underscore'),
-  
+
   Values = require('./models'),
   api = require('./api');
 
-// saves values in db
+// saves values to db
 exports.saveToDatabase = function (obj) {
   Values.create({
     CAD: obj.cad,
     USD: obj.usd,
     CLP: obj.clp
     
-  }, function (err, values) {
-    err ? console.log(err) : console.log('Succesfully created values: ' + values + ' in db.');
-    return;
+  }, (err, values) => {
+    return err ? console.log(err) : console.log('Succesfully created values: ' + values + ' in db.');
   }); 
 }
 
 // puts group of values in object
 exports.getAllCoins = function () {
-  var getAllPromise = new Promise(function (resolve, reject) {
+  var getAllPromise = new Promise((resolve, reject) => {
 
     var coinsPaths = {
       cad: api.cad,
@@ -31,14 +30,14 @@ exports.getAllCoins = function () {
     };
 
     var readAll = function (coinsPaths) {
-      var promise = new Promise(function (resolve, reject) {
+      var promise = new Promise((resolve, reject) => {
 
         var result = {};
         var mapPosition = _.size(coinsPaths);
 
-        _.map(coinsPaths, function (path, key) {
+        _.map(coinsPaths, (path, key) => {
           readUrl(path)
-          .then(function (value) {
+          .then((value) => {
             mapPosition--;
             result[key] = value;
 
@@ -51,38 +50,31 @@ exports.getAllCoins = function () {
     }
 
     var readUrl = function (path) {
-      var promise = new Promise(function (resolve, reject) {
+      var promise = new Promise((resolve, reject) => {
         
         readValue(path)
-        .then(function (value) {
-          resolve(value);
-        })
-        .catch(function (err) {
-          console.log(err);
-        })
+        .then((value) => { resolve(value); })
+        .catch((err) => { console.log(err); })
 
       });
 
       return promise;
     }
 
-    // Executes promise
+    // executes promise
     readAll(coinsPaths)
-    .then(function (result) {
-      resolve(result);
-    })
-    .catch(function (err) {
-      reject(err);
-    });
+    .then((result) => { resolve(result); })
+    .catch((err) => { reject(err); });
+
   });
 
   return getAllPromise;
 }
 
-// reads content of an url and returns an string with result
+// reads content of a url and returns a string with result
 function readValue (path) {
-  var promise = new Promise(function (resolve, reject) {
-    request(path, function (err, res, body) {
+  var promise = new Promise((resolve, reject) => {
+    request(path, (err, res, body) => {
       err ? reject(err) : resolve(body);
       return;
     });
